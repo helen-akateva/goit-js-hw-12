@@ -56,7 +56,7 @@ async function handleFormSubmit(event) {
     }
 
     createGallery(res.hits);
-    scrollPage();
+    setTimeout(scrollPage, 0);
 
     if (res.totalHits > perPage) {
       showLoadMoreButton();
@@ -92,7 +92,7 @@ async function handleClick() {
       iziToast.info({
         message: "We're sorry, but you've reached the end of search results.",
         messageColor: '#fff',
-        backgroundColor: ' #59a10d',
+        backgroundColor: '#59a10d',
         position: 'bottomRight',
         icon: '',
       });
@@ -108,9 +108,11 @@ function scrollPage() {
   const galleryItem = document.querySelector('.gallery-item');
   if (galleryItem) {
     const itemHeight = galleryItem.getBoundingClientRect().height;
-    window.scrollBy({
-      top: itemHeight * 2,
-      behavior: 'smooth',
+    requestAnimationFrame(() => {
+      window.scrollBy({
+        top: itemHeight * 2,
+        behavior: 'smooth',
+      });
     });
   }
 }
