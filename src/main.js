@@ -39,6 +39,7 @@ async function handleFormSubmit(event) {
     });
     return;
   }
+
   try {
     const res = await getImagesByQuery(inputQuery, page);
 
@@ -82,13 +83,14 @@ async function handleClick() {
   try {
     const res = await getImagesByQuery(inputQuery, page);
     createGallery(res.hits);
+    scrollPage();
 
     const lastPage = Math.ceil(res.totalHits / perPage);
 
     if (page === lastPage) {
       hideLoadMoreButton();
       iziToast.info({
-        message: 'Were sorry, but you ve reached the end of search results.',
+        message: "We're sorry, but you've reached the end of search results.",
         messageColor: '#fff',
         backgroundColor: ' #59a10d',
         position: 'bottomRight',
