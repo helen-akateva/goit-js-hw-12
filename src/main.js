@@ -25,11 +25,11 @@ async function handleFormSubmit(event) {
   page = 1;
   hideLoadMoreButton();
   clearGallery();
-  showLoader();
 
   inputQuery = event.currentTarget.elements['search-text'].value.trim();
 
   if (!inputQuery) {
+    hideLoader();
     iziToast.warning({
       message: 'Please enter a search term!',
       position: 'topRight',
@@ -39,7 +39,7 @@ async function handleFormSubmit(event) {
     });
     return;
   }
-
+  showLoader();
   try {
     const res = await getImagesByQuery(inputQuery, page);
 
@@ -60,6 +60,14 @@ async function handleFormSubmit(event) {
 
     if (res.totalHits > perPage) {
       showLoadMoreButton();
+    } else {
+      iziToast.info({
+        message: "We're sorry, but you've reached the end of search results.",
+        messageColor: '#fff',
+        backgroundColor: '#59a10d',
+        position: 'bottomRight',
+        icon: '',
+      });
     }
   } catch (error) {
     console.log(error);
