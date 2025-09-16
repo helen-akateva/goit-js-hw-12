@@ -10,18 +10,19 @@
 
 .loader {
   display: block;
-    margin: 32px auto;
-    font-size: 16px;
-    border: none;
-    color: #4e75ff;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 400;
-    text-align: center;
-    &.is-hidden {
-        display: none;
-      }
-    
-} 
+  margin: 32px auto;
+  font-size: 20px;
+  border: none;
+  color: #4e75ff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  position: relative;
+}
+
+.loader.is-hidden {
+  display: none;
+}
 
 .loader:before {
   content: '';
@@ -31,9 +32,9 @@
 .loader:after {
   content: '';
   position: absolute;
-  right: -4px;
+  right: -6px;
   top: 50%;
-  transform: translatey(-45%);
+  transform: translateY(-50%);
   width: 2px;
   height: 1.3em;
   background: currentColor;
@@ -53,44 +54,44 @@
 
 @keyframes print {
   0% {
-    content: 'L'
+    content: 'L';
   }
 
   10% {
-    content: 'Lo'
+    content: 'Lo';
   }
 
   20% {
-    content: 'Loa'
+    content: 'Loa';
   }
 
   30% {
-    content: 'Load'
+    content: 'Load';
   }
 
   40% {
-    content: 'Loadi'
+    content: 'Loadi';
   }
 
   50% {
-    content: 'Loadin'
+    content: 'Loadin';
   }
 
   60% {
-    content: 'Loading'
+    content: 'Loading';
   }
 
   70% {
-    content: 'Loading.'
+    content: 'Loading.';
   }
 
   80% {
-    content: 'Loading..'
+    content: 'Loading..';
   }
 
   90%,
   100% {
-    content: 'Loading...'
+    content: 'Loading...';
   }
 }
 
