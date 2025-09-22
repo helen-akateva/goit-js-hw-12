@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>goit-js-hw-12</title>
     <script type="module" crossorigin src="/goit-js-hw-12/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-BoXikJlb.js">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/vendor-C3Bycd5f.css">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/index-CgEZeCsg.css">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-C3vE7q-J.js">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/vendor-DnGaGgwy.css">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/index-DWgJaiRJ.css">
   </head>
   <body>
     <main>
@@ -28,12 +28,10 @@
 
       <button type="button" class="load-more is-hidden">Load more</button>
       <span class="loader is-hidden"></span> -->
-
-      <section class="stories section">
+      <section id="stories" class="stories section">
         <div class="container">
           <div class="stories-heading">
             <h2 class="stories-title">Щасливі історії, що надихають</h2>
-
             <p class="stories-text">
               Ці хвостики вже знайшли свій дім. Ваш майбутній друг теж чекає на
               вас
@@ -41,27 +39,55 @@
           </div>
 
           <div class="swiper swiper-story">
-            <div class="swiper-wrapper swiper-wrapper-story" role="list"></div>
+            <div class="swiper-wrapper swiper-wrapper-story" role="list">
+              <!-- Контент буде додано динамічно через JavaScript -->
+            </div>
 
             <div class="swiper-navigation-story">
               <div class="swiper-pagination swiper-pagination-story"></div>
 
               <div class="navigation-buttons-story">
                 <button
-                  class="swiper-button-prev story-button-prev"
+                  class="story-button-prev"
                   type="button"
+                  aria-label="Попередній відгук"
                 >
-                  <svg class="story-button-icon" width="24" height="24">
-                    <use href=""></use>
+                  <svg
+                    class="story-button-icon"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M15 18L9 12L15 6"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="none"
+                    />
                   </svg>
                 </button>
 
                 <button
-                  class="swiper-button-next story-button-next"
+                  class="story-button-next"
                   type="button"
+                  aria-label="Наступний відгук"
                 >
-                  <svg class="story-button-icon" width="24" height="24">
-                    <use href=""></use>
+                  <svg
+                    class="story-button-icon"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M9 18L15 12L9 6"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="none"
+                    />
                   </svg>
                 </button>
               </div>
