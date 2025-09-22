@@ -1,0 +1,52 @@
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
+import { getFeedbacks } from './story-api-js';
+
+const cardStoryEl = document.querySelector('.swiper-wrapper');
+
+function creatStoriesCard(events) {
+  const markup = events
+    .map(({ rate, description, author }) => {
+      return `<div class="swiper-slide swiper-slide-story" role="listitem">
+                <div class="story-card">
+                  <div class="story-rating">${rate}</div>
+                  <p class="story-review">${description}</p>
+                  <p class="story-author">${author}</p>
+                </div>
+              </div>`;
+    })
+    .join('');
+
+  cardStoryEl.insertAdjacentHTML('beforeend', markup);
+}
+
+function initSwiper() {
+  const swiper = new Swiper('.swiper-story', {
+    slidesPerView: 1,
+    spaceBetween: 32,
+
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1440: { slidesPerView: 2 },
+    },
+  });
+}
+
+async function initStories() {
+  const data = await getFeedbacks();
+  if (data && data.feedbacks) {
+    creatStoriesCard(data.feedbacks);
+    initSwiper();
+  }
+}
+initStories();
