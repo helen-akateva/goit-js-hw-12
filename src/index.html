@@ -9,7 +9,7 @@
   </head>
   <body>
     <main>
-      <form class="form">
+      <!-- <form class="form">
         <label>
           <input
             type="text"
@@ -24,9 +24,50 @@
       <ul class="gallery"></ul>
 
       <button type="button" class="load-more is-hidden">Load more</button>
-      <span class="loader is-hidden"></span>
-    </main>
+      <span class="loader is-hidden"></span> -->
 
-    <script type="module" src="./main.js"></script>
+      <section class="stories section">
+        <div class="container">
+          <div class="stories-heading">
+            <h2 class="stories-title">Щасливі історії, що надихають</h2>
+
+            <p class="stories-text">
+              Ці хвостики вже знайшли свій дім. Ваш майбутній друг теж чекає на
+              вас
+            </p>
+          </div>
+
+          <div class="swiper swiper-story">
+            <div class="swiper-wrapper swiper-wrapper-story" role="list"></div>
+
+            <div class="swiper-navigation-story">
+              <div class="swiper-pagination swiper-pagination-story"></div>
+
+              <div class="navigation-buttons-story">
+                <button
+                  class="swiper-button-prev story-button-prev"
+                  type="button"
+                >
+                  <svg class="story-button-icon" width="24" height="24">
+                    <use href=""></use>
+                  </svg>
+                </button>
+
+                <button
+                  class="swiper-button-next story-button-next"
+                  type="button"
+                >
+                  <svg class="story-button-icon" width="24" height="24">
+                    <use href=""></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./js/story-js"></script>
+    <!-- <script type="module" src="./main.js"></script> -->
   </body>
 </html>
