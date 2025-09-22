@@ -25,12 +25,10 @@
 
       <button type="button" class="load-more is-hidden">Load more</button>
       <span class="loader is-hidden"></span> -->
-
-      <section class="stories section">
+      <section id="stories" class="stories section">
         <div class="container">
           <div class="stories-heading">
             <h2 class="stories-title">Щасливі історії, що надихають</h2>
-
             <p class="stories-text">
               Ці хвостики вже знайшли свій дім. Ваш майбутній друг теж чекає на
               вас
@@ -38,27 +36,55 @@
           </div>
 
           <div class="swiper swiper-story">
-            <div class="swiper-wrapper swiper-wrapper-story" role="list"></div>
+            <div class="swiper-wrapper swiper-wrapper-story" role="list">
+              <!-- Контент буде додано динамічно через JavaScript -->
+            </div>
 
             <div class="swiper-navigation-story">
               <div class="swiper-pagination swiper-pagination-story"></div>
 
               <div class="navigation-buttons-story">
                 <button
-                  class="swiper-button-prev story-button-prev"
+                  class="story-button-prev"
                   type="button"
+                  aria-label="Попередній відгук"
                 >
-                  <svg class="story-button-icon" width="24" height="24">
-                    <use href=""></use>
+                  <svg
+                    class="story-button-icon"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M15 18L9 12L15 6"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="none"
+                    />
                   </svg>
                 </button>
 
                 <button
-                  class="swiper-button-next story-button-next"
+                  class="story-button-next"
                   type="button"
+                  aria-label="Наступний відгук"
                 >
-                  <svg class="story-button-icon" width="24" height="24">
-                    <use href=""></use>
+                  <svg
+                    class="story-button-icon"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M9 18L15 12L9 6"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="none"
+                    />
                   </svg>
                 </button>
               </div>

@@ -8,7 +8,7 @@ export async function getFeedbacks(page, limit) {
     const { data } = await axios.get('/feedbacks', {
       params: {
         page: 1,
-        limit: 15,
+        limit: 20,
       },
     });
     return data;
