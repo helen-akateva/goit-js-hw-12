@@ -1,10 +1,13 @@
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
+import Swiper from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { getFeedbacks } from './story-api-js';
 
-const cardStoryEl = document.querySelector('.swiper-wrapper');
-
 function creatStoriesCard(events) {
+  const cardStoryEl = document.querySelector('.swiper-wrapper-story');
+
   const markup = events
     .map(({ rate, description, author }) => {
       return `<div class="swiper-slide swiper-slide-story" role="listitem">
@@ -17,36 +20,116 @@ function creatStoriesCard(events) {
     })
     .join('');
 
-  cardStoryEl.insertAdjacentHTML('beforeend', markup);
+  cardStoryEl.innerHTML = markup;
 }
 
 function initSwiper() {
+  // Чекаємо, щоб елементи були в DOM
+  const swiperContainer = document.querySelector('.swiper-story');
+  if (!swiperContainer) {
+    console.error('Swiper container not found');
+    return;
+  }
+
   const swiper = new Swiper('.swiper-story', {
+    modules: [Navigation, Pagination],
     slidesPerView: 1,
     spaceBetween: 32,
 
+    // Використовуємо стандартні класи Swiper
+    wrapperClass: 'swiper-wrapper-story',
+    slideClass: 'swiper-slide-story',
+
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: '.story-button-next',
+      prevEl: '.story-button-prev',
     },
 
     pagination: {
-      el: '.swiper-pagination',
+      el: '.swiper-pagination-story',
       clickable: true,
+      dynamicBullets: true,
+      dynamicMainBullets: 5,
     },
 
     breakpoints: {
-      768: { slidesPerView: 2 },
-      1440: { slidesPerView: 2 },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 24,
+      },
+      1440: {
+        slidesPerView: 2,
+        spaceBetween: 32,
+      },
+    },
+
+    on: {
+      init: function (swiper) {
+        updateNavButtons(swiper);
+        console.log('Swiper initialized');
+      },
+      slideChange: function (swiper) {
+        updateNavButtons(swiper);
+      },
     },
   });
+
+  return swiper;
+}
+
+// Функція для оновлення стану навігаційних кнопок
+function updateNavButtons(swiper) {
+  const prevButton = document.querySelector('.story-button-prev');
+  const nextButton = document.querySelector('.story-button-next');
+
+  if (!prevButton || !nextButton) {
+    console.error('Navigation buttons not found');
+    return;
+  }
+
+  if (swiper.isBeginning) {
+    prevButton.disabled = true;
+    prevButton.classList.add('swiper-button-disabled');
+  } else {
+    prevButton.disabled = false;
+    prevButton.classList.remove('swiper-button-disabled');
+  }
+
+  if (swiper.isEnd) {
+    nextButton.disabled = true;
+    nextButton.classList.add('swiper-button-disabled');
+  } else {
+    nextButton.disabled = false;
+    nextButton.classList.remove('swiper-button-disabled');
+  }
 }
 
 async function initStories() {
-  const data = await getFeedbacks();
-  if (data && data.feedbacks) {
-    creatStoriesCard(data.feedbacks);
-    initSwiper();
+  try {
+    const data = await getFeedbacks();
+    if (data && data.feedbacks && data.feedbacks.length > 0) {
+      creatStoriesCard(data.feedbacks);
+
+      // Невелика затримка для впевненості, що DOM оновився
+      setTimeout(() => {
+        initSwiper();
+      }, 100);
+    } else {
+      console.error('No feedbacks data received');
+    }
+  } catch (error) {
+    console.error('Error loading feedbacks:', error);
+
+    creatStoriesCard(testData);
+    setTimeout(() => {
+      initSwiper();
+    }, 100);
   }
 }
-initStories();
+
+// Ініціалізація після завантаження DOM
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initStories);
+} else {
+  initStories();
+}
