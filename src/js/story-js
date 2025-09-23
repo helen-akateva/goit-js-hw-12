@@ -24,19 +24,17 @@ function creatStoriesCard(events) {
 }
 
 function initSwiper() {
-  // Чекаємо, щоб елементи були в DOM
-  const swiperContainer = document.querySelector('.swiper-story');
-  if (!swiperContainer) {
-    console.error('Swiper container not found');
-    return;
-  }
+  // const swiperContainer = document.querySelector('.swiper-story');
+  // if (!swiperContainer) {
+  //   console.error('Swiper container not found');
+  //   return;
+  // }
 
   const swiper = new Swiper('.swiper-story', {
     modules: [Navigation, Pagination],
     slidesPerView: 1,
     spaceBetween: 32,
 
-    // Використовуємо стандартні класи Swiper
     wrapperClass: 'swiper-wrapper-story',
     slideClass: 'swiper-slide-story',
 
@@ -63,73 +61,80 @@ function initSwiper() {
       },
     },
 
-    on: {
-      init: function (swiper) {
-        updateNavButtons(swiper);
-        console.log('Swiper initialized');
-      },
-      slideChange: function (swiper) {
-        updateNavButtons(swiper);
-      },
-    },
+    // on: {
+    //   init: function (swiper) {
+    //     updateNavButtons(swiper);
+    //     console.log('Swiper initialized');
+    //   },
+    //   slideChange: function (swiper) {
+    //     updateNavButtons(swiper);
+    //   },
+    // },
   });
 
   return swiper;
 }
 
-// Функція для оновлення стану навігаційних кнопок
-function updateNavButtons(swiper) {
-  const prevButton = document.querySelector('.story-button-prev');
-  const nextButton = document.querySelector('.story-button-next');
+// function updateNavButtons(swiper) {
+//   const prevButton = document.querySelector('.story-button-prev');
+//   const nextButton = document.querySelector('.story-button-next');
 
-  if (!prevButton || !nextButton) {
-    console.error('Navigation buttons not found');
-    return;
-  }
+//   if (!prevButton || !nextButton) {
+//     console.error('Navigation buttons not found');
+//     return;
+//   }
 
-  if (swiper.isBeginning) {
-    prevButton.disabled = true;
-    prevButton.classList.add('swiper-button-disabled');
-  } else {
-    prevButton.disabled = false;
-    prevButton.classList.remove('swiper-button-disabled');
-  }
+//   if (swiper.isBeginning) {
+//     prevButton.disabled = true;
+//     prevButton.classList.add('swiper-button-disabled');
+//   } else {
+//     prevButton.disabled = false;
+//     prevButton.classList.remove('swiper-button-disabled');
+//   }
 
-  if (swiper.isEnd) {
-    nextButton.disabled = true;
-    nextButton.classList.add('swiper-button-disabled');
-  } else {
-    nextButton.disabled = false;
-    nextButton.classList.remove('swiper-button-disabled');
-  }
-}
+//   if (swiper.isEnd) {
+//     nextButton.disabled = true;
+//     nextButton.classList.add('swiper-button-disabled');
+//   } else {
+//     nextButton.disabled = false;
+//     nextButton.classList.remove('swiper-button-disabled');
+//   }
+// }
+
+// async function initStories() {
+//   try {
+//     const data = await getFeedbacks();
+//     if (data && data.feedbacks && data.feedbacks.length > 0) {
+//       creatStoriesCard(data.feedbacks);
+
+//       setTimeout(() => {
+//         initSwiper();
+//       }, 100);
+//     } else {
+//       console.error('No feedbacks data received');
+//     }
+//   } catch (error) {
+//     console.error('Error loading feedbacks:', error);
+
+//     creatStoriesCard(testData);
+//     setTimeout(() => {
+//       initSwiper();
+//     }, 100);
+//   }
+// }
+
+// initStories();
+// if (document.readyState === 'loading') {
+//   document.addEventListener('DOMContentLoaded', initStories);
+// } else {
+//   initStories();
+// }
 
 async function initStories() {
-  try {
-    const data = await getFeedbacks();
-    if (data && data.feedbacks && data.feedbacks.length > 0) {
-      creatStoriesCard(data.feedbacks);
-
-      // Невелика затримка для впевненості, що DOM оновився
-      setTimeout(() => {
-        initSwiper();
-      }, 100);
-    } else {
-      console.error('No feedbacks data received');
-    }
-  } catch (error) {
-    console.error('Error loading feedbacks:', error);
-
-    creatStoriesCard(testData);
-    setTimeout(() => {
-      initSwiper();
-    }, 100);
+  const data = await getFeedbacks();
+  if (data && data.feedbacks) {
+    creatStoriesCard(data.feedbacks);
+    initSwiper();
   }
 }
-
-// Ініціалізація після завантаження DOM
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initStories);
-} else {
-  initStories();
-}
+initStories();

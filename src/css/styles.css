@@ -262,23 +262,7 @@ p.text {
  
 }
 
-/* Стилі для рейтингу зірочками */
-.story-rating {
-  margin-bottom: 32px;
-}
 
-.stars-rating {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-}
-
-.star {
-  font-size: 20px;
-  line-height: 1;
-  position: relative;
-  display: inline-block;
-}
 
 
 
@@ -342,8 +326,8 @@ p.text {
 }
 
 .swiper-pagination-story .swiper-pagination-bullet-active {
-  background: #332c22;
-  transform: scale(1.1);
+  background: #332c22 !important;
+  /* transform: scale(1.1); */
 }
 
 .navigation-buttons-story {
